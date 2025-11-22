@@ -1,3 +1,7 @@
 captchas
 venv
 hub
+
+# Deployment guides (local reference only)
+DEPLOYMENT.md
+QUICK_DEPLOY.md

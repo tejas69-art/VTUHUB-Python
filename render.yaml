@@ -1,0 +1,19 @@
+# Render.com deployment configuration
+# This file makes deployment to Render even easier
+
+services:
+  - type: web
+    name: vtuhub
+    env: docker
+    dockerfilePath: ./Dockerfile.cpu
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: HF_HOME
+        value: /app/.cache/huggingface
+      - key: HF_HUB_DISABLE_SYMLINKS_WARNING
+        value: "1"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    healthCheckPath: /health
+

@@ -18,7 +18,11 @@ app = FastAPI(title="VTU Scraper API")
 templates = Jinja2Templates(directory="templates")
 
 
-
+# ----------------- HEALTH CHECK -----------------
+@app.get("/health")
+def health():
+    """Health check endpoint for deployment platforms"""
+    return {"status": "ok", "service": "VTU Scraper API"}
 
 
 # ----------------- SINGLE POST API -----------------

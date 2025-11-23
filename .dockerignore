@@ -39,7 +39,6 @@ xet/
 Dockerfile.gpu
 Dockerfile
 requirements.txt
-requirements-prod.txt
 DEPLOYMENT.md
 QUICK_DEPLOY.md
 DOCKER_SETUP.md

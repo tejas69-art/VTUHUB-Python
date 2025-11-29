@@ -1,7 +1,4 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi import Request
 from models.requests.models import SingleRequest, RangeRequest
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -14,8 +11,6 @@ from services.mainclass import VTUScraper
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 app = FastAPI(title="VTU Scraper API")
-
-templates = Jinja2Templates(directory="templates")
 
 
 # ----------------- HEALTH CHECK -----------------
@@ -157,10 +152,3 @@ def range_post(body: RangeRequest):
                 results[usn] = json.dumps({"error": str(e)})
 
     return results
-@app.get("/about", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request})

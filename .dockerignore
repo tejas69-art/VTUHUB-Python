@@ -30,6 +30,11 @@ xet/
 *.log
 *.md
 !readme.md
+templates/
+services/EasyOCR.py
+services/PaddleOCR.py
+services/ocr_exact.py
+services/trocr_mp.py
 
 # Git
 .git/
@@ -37,8 +42,11 @@ xet/
 
 # Docker
 Dockerfile.gpu
+Dockerfile.cpu
 Dockerfile
 requirements.txt
+requirements-prod.txt
 DEPLOYMENT.md
 QUICK_DEPLOY.md
 DOCKER_SETUP.md
+render.yaml

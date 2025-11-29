@@ -42,8 +42,11 @@ services/trocr_mp.py
 
 # Docker
 Dockerfile.gpu
+Dockerfile.cpu
 Dockerfile
 requirements.txt
+requirements-prod.txt
 DEPLOYMENT.md
 QUICK_DEPLOY.md
 DOCKER_SETUP.md
+render.yaml

@@ -51,4 +51,8 @@ COPY . /app
 EXPOSE 8000
 
 # run uvicorn
-CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "8000"]
+EXPOSE 8000
+
+
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
+

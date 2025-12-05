@@ -48,7 +48,7 @@ RUN find /usr/local/lib/python3.12/site-packages -type d -name __pycache__ -exec
 COPY . /app
 
 # expose
-EXPOSE 8000
+EXPOSE 8080
 
 # run uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

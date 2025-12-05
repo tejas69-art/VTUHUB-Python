@@ -1,5 +1,5 @@
 # Dockerfile.cpu
-FROM python:3.12-slim as builder
+FROM python:3.12-slim AS builder
 
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
@@ -51,4 +51,5 @@ COPY . /app
 EXPOSE 8080
 
 # run uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Use PORT environment variable (Cloud Run sets this dynamically)
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}

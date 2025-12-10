@@ -27,11 +27,13 @@ def _load_model_with_retry(max_retries=3, delay=2):
     for attempt in range(max_retries):
         try:
             print(f"Loading TrOCR model (attempt {attempt + 1}/{max_retries})...")
-            _processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-stage1")
+            # Force local_files_only=True to rely solely on the baked-in model
+            _processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-stage1", local_files_only=True)
             _model = VisionEncoderDecoderModel.from_pretrained(
                 "microsoft/trocr-base-stage1",
                 device_map=None,          # disables meta
-                torch_dtype=torch.float32
+                torch_dtype=torch.float32,
+                local_files_only=True
             )
             _model.to("cpu")
             _model.eval()

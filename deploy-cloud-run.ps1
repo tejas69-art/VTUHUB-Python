@@ -64,7 +64,7 @@ gcloud run deploy $SERVICE_NAME `
     --cpu 2 `
     --timeout 300 `
     --max-instances 10 `
-    --set-env-vars "PYTHONUNBUFFERED=1,HF_HOME=/app/.cache/huggingface,HF_HUB_DISABLE_SYMLINKS_WARNING=1"
+    --set-env-vars "PYTHONUNBUFFERED=1,HF_HUB_DISABLE_SYMLINKS_WARNING=1"
 
 Write-Host "[SUCCESS] Deployment complete!" -ForegroundColor Green
 Write-Host "Getting service URL..." -ForegroundColor Yellow

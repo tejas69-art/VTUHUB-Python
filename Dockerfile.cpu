@@ -41,6 +41,18 @@ RUN find /usr/local/lib/python3.12/site-packages -type d -name __pycache__ -exec
     && find /usr/local/lib/python3.12/site-packages -type f -name "*.pyo" -delete
 
 # Copy source code
+# Set model cache directory
+ENV HF_HOME=/app/model_cache
+
+# Pre-download the model during build to bake it into the image
+# This prevents runtime downloads and rate-limiting issues
+RUN python -c "import os; from transformers import TrOCRProcessor, VisionEncoderDecoderModel; \
+    os.makedirs('/app/model_cache', exist_ok=True); \
+    print('Downloading TrOCR model...'); \
+    TrOCRProcessor.from_pretrained('microsoft/trocr-base-stage1'); \
+    VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-stage1')"
+
+# Copy source code
 COPY . /app
 
 # expose

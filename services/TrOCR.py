@@ -4,7 +4,8 @@ from PIL import Image
 from .Gray import clean_captcha
 import time
 import os
-os.environ["HF_HOME"] = os.getcwd()
+if "HF_HOME" not in os.environ:
+    os.environ["HF_HOME"] = os.getcwd()
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
 # Global variables for lazy loading

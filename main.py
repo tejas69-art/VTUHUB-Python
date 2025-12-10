@@ -1,16 +1,32 @@
 from fastapi import FastAPI, HTTPException
 from models.requests.models import SingleRequest, RangeRequest
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import asynccontextmanager
 
 import urllib3
 import re
 import json
 
 from services.mainclass import VTUScraper
+from services.TrOCR import load_model
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-app = FastAPI(title="VTU Scraper API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Load model on startup to ensure fast first response
+    print("Pre-loading TrOCR model...")
+    try:
+        load_model()
+        print("TrOCR model pre-loaded successfully.")
+    except Exception as e:
+        print(f"CRITICAL: Failed to pre-load model: {e}")
+        # Build will fail if we raise here, which is good
+        raise e
+    yield
+    # Clean up if needed
+
+app = FastAPI(title="VTU Scraper API", lifespan=lifespan)
 
 
 # ----------------- HEALTH CHECK -----------------

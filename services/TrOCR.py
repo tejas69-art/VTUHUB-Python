@@ -13,7 +13,7 @@ _processor = None
 _model = None
 _model_load_attempted = False
 
-def _load_model_with_retry(max_retries=3, delay=2):
+def load_model(max_retries=3, delay=2):
     """Load the TrOCR model with retry logic for Cloud Run"""
     global _processor, _model, _model_load_attempted
     
@@ -53,7 +53,7 @@ def run_ocr(img):
     start = time.time()
     
     # Load model on first use
-    processor, model = _load_model_with_retry()
+    processor, model = load_model()
     
     ENABLE_CLEAN = True
     if ENABLE_CLEAN:
